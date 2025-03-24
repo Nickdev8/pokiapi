@@ -28,17 +28,23 @@ catchButton.onclick = function () {
 };
 
 
+const fintbutton = document.getElementById('js--search-button');
+const findtext = document.getElementById('js--search-text');
 
 const movietitle = document.getElementById('js--movie-title');
 const movietext = document.getElementById('js--movie-text');
 const movieimg = document.getElementById('js--movie-image');
+const moviecard = document.getElementById('js--movie-card');
 
-let movie = fetch('https://api.tvmaze.com/search/shows?q=' + 'flint the time detective')
+fintbutton.onclick = function () {
+
+    let movie = fetch('https://api.tvmaze.com/search/shows?q=' + findtext.value)
     .then(function (response) {
         return response.json();
     })
     .then(function (data) {
         console.log(data[0].show);
+        moviecard.style.display = 'flex';
         movietitle.innerHTML = data[0].show.name;
         movietext.innerHTML = data[0].show.summary;
         movieimg.src = data[0].show.image.medium;
@@ -47,3 +53,4 @@ let movie = fetch('https://api.tvmaze.com/search/shows?q=' + 'flint the time det
     .catch(function (error) {
         console.log(error);
     });
+};
